@@ -8,6 +8,9 @@ const { type } = require('os')
 
 console.log('Módulos inicializados com sucesso')
 
+
+
+
 menu()
 
 function menu(){
