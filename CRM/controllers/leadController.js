@@ -37,7 +37,7 @@ function serveHTML(res, filePath, mensagem = "") {
     if (fs.existsSync(filePath)) {
         let html = fs.readFileSync(filePath, 'utf8');
         // insere a mensagem no HTML
-        html = html.replace("{{mensagem}}", mensagem);
+        html = html.replace("Cadastre seu lead", mensagem);
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(html);
     } else {
