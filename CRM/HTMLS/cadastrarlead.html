@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Lead</title>
-    <link rel="stylesheet" href="styleHtmls.css">
-    <script src="scriptCadastro.js" defer></script>
 </head>
 <body>
-    <h1>Cadastrar Leads</h1>
-    <form>
-        <label for="numero">Digite um número de telefone:</label>
-        <input type="text" id="numero" placeholder="Somente números" pattern="^\d{10,11}$" title="Apenas números são permitidos" required>
-        <label for="CadLNome">Digite o Nome:</label>
-        <input type="text" id="CadLNome" placeholder="Digite o Nome do lead" pattern="^[a-zA-ZÀ-ÿ\s]+$">
-        <label for="CadLEndereco">Digite o endereço</label>
-        <input type="text" id="CadLEndereco" placeholder="Digite um  Endereço valido">
+    <h1>Cadastrar Lead</h1>
 
-        <button type="submit">Enviar</button>
+    <!-- Aqui a mensagem vai aparecer -->
+    <p style="color: green;">{{mensagem}}</p>
+
+    <form action="/cadastra" method="POST">
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" required><br><br>
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required><br><br>
+
+        <button type="submit">Cadastrar</button>
     </form>
-   
-    
-
 </body>
 </html>
