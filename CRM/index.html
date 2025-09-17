@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline de Vendas</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- <script src="index.js" defer></script> -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">Pipeline de Vendas</h1>
+                <p class="subtitle">Gerencie seus leads e acompanhe o funil de vendas</p>
+            </div>
+        </header>
+        
+        <main class="main-content">
+            <div class="dashboard-grid">
+                <!-- Card principal - Pipeline Overview -->
+                <div id="PipelineVendas" class="card card-primary">
+                    <div class="card-header">
+                        <div class="card-icon primary">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 3v18h18"/>
+                                <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
+                            </svg>
+                        </div>
+                        <div  class="card-content">
+                            <h3 class="card-title">Pipeline de Vendas</h3>
+                            <p class="card-description">Visão geral do funil de conversão</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações principais -->
+                <div  id="cadastroLead" class="card card-action">
+                    <div class="card-header">
+                        <div class="card-icon success">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 5v14"/>
+                                <path d="M5 12h14"/>
+                            </svg>
+                        </div>
+                        <div  class="card-content">
+                            <h3  class="card-title">Cadastrar Lead</h3>
+                            <p class="card-description">Adicionar novo prospect</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="registrarAtv" class="card card-action">
+                    <div class="card-header">
+                        <div class="card-icon info">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14,2 14,8 20,8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10,9 9,9 8,9"/>
+                            </svg>
+                        </div>
+                        <div  class="card-content">
+                            <h3  class="card-title">Registrar Atividade</h3>
+                            <p class="card-description">Documentar interações</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações de gerenciamento -->
+                <div id="attLead" class="card card-action">
+                    <div class="card-header">
+                        <div class="card-icon warning">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                            </svg>
+                        </div>
+                        <div  class="card-content">
+                            <h3  class="card-title">Atualizar Lead</h3>
+                            <p class="card-description">Editar informações</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="consultLead" class="card card-action">
+                    <div class="card-header">
+                        <div class="card-icon secondary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"/>
+                                <path d="M21 21l-4.35-4.35"/>
+                            </svg>
+                        </div>
+                        <div  class="card-content">
+                            <h3  class="card-title">Consultar Lead</h3>
+                            <p class="card-description">Buscar e visualizar</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="RmvLead" class="card card-action">
+                    <div class="card-header">
+                        <div class="card-icon danger">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="3,6 5,6 21,6"/>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                <line x1="10" y1="11" x2="10" y2="17"/>
+                                <line x1="14" y1="11" x2="14" y2="17"/>
+                            </svg>
+                        </div>
+                        <div  class="card-content">
+                            <h3 class="card-title">Remover Lead</h3>
+                            <p class="card-description">Excluir registro</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card de relatório -->
+                <div id="relatorioFV" class="card card-report">
+                    <div class="card-header">
+                        <div class="card-icon report">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c1.66 0 3.2.45 4.53 1.23"/>
+                                <path d="M16 8V4h4"/>
+                                <path d="M12 16l4-4-4-4"/>
+                            </svg>
+                        </div>
+                        <div  class="card-content">
+                            <h3  class="card-title">Relatório Funil de Vendas</h3>
+                            <p class="card-description">Análise detalhada de performance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2025 Sistema de Pipeline de Vendas</p>
+        </footer>
+    </div>
+</body>
+</html>
+
