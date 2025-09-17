@@ -29,10 +29,31 @@ PipelineVendas.addEventListener('click', function() {
 CadastrarLead.addEventListener('click',function()
 {
     window.location.assign("./HTMLS/cadastrarlead.html");
-
-
-
-
-
-
 });
+
+RATV.addEventListener('click',function()
+{
+    window.location.assign("./HTMLS/registraratv.html");
+});
+
+AttLead.addEventListener('click',function()
+{
+    window.location.assign("./HTMLS/atualizarlead.html");
+});
+
+consultLead.addEventListener('click',function()
+{
+    window.location.assign("./HTMLS/consultarlead.html");
+});
+RmvLead.addEventListener('click',function()
+{
+    window.location.assign("./HTMLS/removeratv.html");
+});
+relatorioFV.addEventListener('click',function()
+{
+    window.location.assign("./HTMLS/relatorio.html");
+});
+
+
+
+
