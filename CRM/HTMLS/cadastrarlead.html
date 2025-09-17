@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Lead</title>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <h1>Cadastrar Leads</h1>
+    <form>
+        <label for="numero">Digite um número de telefone:</label>
+        <input type="text" id="numero" placeholder="Somente números" pattern="^\d{10,11}$" title="Apenas números são permitidos" required>
+        <label for="CadLNome">Digite o Nome:</label>
+        <input type="text" id="CadLNome" placeholder="Digite o Nome do lead" pattern="^[a-zA-ZÀ-ÿ\s]+$">
+        <label for="CadLEndereco">Digite o endereço</label>
+        <input type="text" id="CadLEndereco" placeholder="Digite um  Endereço valido">
+
+        <button type="submit">Enviar</button>
+    </form>
+   
+    
+
+</body>
+</html>

@@ -26,3 +26,13 @@ PipelineVendas.addEventListener('click', function() {
         "Fechamento"
     );
 });
+CadastrarLead.addEventListener('click',function()
+{
+    window.location.assign("./HTMLS/cadastrarlead.html");
+
+
+
+
+
+
+});
