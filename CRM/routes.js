@@ -22,7 +22,7 @@ function serveHTML(res, fileName) {
     });
 }
 
-// Lê dados de um POST
+
 function parsePostData(req, callback) {
     let body = '';
     req.on('data', chunk => body += chunk.toString());
@@ -32,12 +32,11 @@ function parsePostData(req, callback) {
     });
 }
 
-// Roteamento
 function handleRoute(parsedUrl, req, res) {
     const { pathname } = parsedUrl;
     console.log('Rota acessada:', pathname, 'Método:', req.method);
 
-    // --- páginas HTML ---
+
     if (pathname === '/' || pathname === '/index') serveHTML(res, 'index.html');
     else if (pathname === '/cadastrar' || pathname === '/cadastrar/') serveHTML(res, 'cadastrarlead.html');
     else if (pathname === '/atualizar') serveHTML(res, 'atualizarlead.html');
@@ -46,7 +45,7 @@ function handleRoute(parsedUrl, req, res) {
     else if (pathname === '/relatorioVendas') serveHTML(res, 'relatorio.html');
     else if (pathname === '/registrar') serveHTML(res, 'registraratv.html');
 
-    // --- rotas que chamam controller ---
+
     else if (pathname === '/cadastra' && req.method === 'POST') parsePostData(req, data => leadController.cadastra(data, res));
     else if (pathname === '/consultaLead' && req.method === 'POST') parsePostData(req, data => atualizarLeadController.consultaLead(data, res));
     else if (pathname === '/atualiza' && req.method === 'POST') parsePostData(req, data => atualizarLeadController.atualiza(data, res));

@@ -19,10 +19,10 @@ function menu(){
         name: 'op',
         message: 'Opções',
         choices: [
-            'Pipeline de Vendas', //mostrar funil de vendas
-            'Cadastrar lead', //dados do lead
-            'Registrar atividade', //tarefas, ligações...
-            'Atualizar Lead', //atualizar lead depois da atividade
+            'Pipeline de Vendas', 
+            'Cadastrar lead', 
+            'Registrar atividade', 
+            'Atualizar Lead', 
             'Consultar Lead',
             'Remover Lead',
             'Relatório Funil de Vendas',
@@ -52,7 +52,7 @@ function menu(){
             
         }else if(op === 'Sair'){
             console.log(chalk.bgBlue.black('Sair do Programa'))
-            //encerrar a execução do sistema
+            
             process.exit()
         }
             
@@ -100,7 +100,7 @@ function AtualizarLead() {
     ]).then((resp) => {
         const { teleLeadBusca } = resp;
 
-        // verifica se existe algum arquivo com esse telefone
+
         const arquivos = fs.readdirSync('leads');
         const arquivoEncontrado = arquivos.find(arquivo => {
             const conteudo = JSON.parse(fs.readFileSync(`leads/${arquivo}`));
@@ -112,15 +112,14 @@ function AtualizarLead() {
             return menu();
         }
 
-        // carregar os dados atuais
         const filePath = `leads/${arquivoEncontrado}`;
         const leadAtual = JSON.parse(fs.readFileSync(filePath));
 
-        // ordem do funil
+
         const ordemFunil = ["inicial", "Proposta", "negociação", "fechamento"];
         const indiceAtual = ordemFunil.indexOf(leadAtual.StatusLead);
 
-        // pedir novos dados
+
         inquirer.prompt([
             {
                 name: 'NomeLead',
@@ -141,25 +140,22 @@ function AtualizarLead() {
                 type :'list',
                 name: 'StatusLead',
                 message: `Status do Lead (atual: ${leadAtual.StatusLead}):`,
-                choices: ordemFunil.slice(indiceAtual) // só deixa do status atual pra frente
+                choices: ordemFunil.slice(indiceAtual) 
             }
         ]).then((resp) => {
             const { NomeLead, teleLead, enderecoLead, StatusLead } = resp;
 
-            // garante que não retrocede
             const novoIndice = ordemFunil.indexOf(StatusLead);
             if (novoIndice < indiceAtual) {
                 console.log(chalk.red(`Não é permitido voltar o status! (${leadAtual.StatusLead} -> ${StatusLead})`));
                 return menu();
             }
 
-            // atualizar dados no mesmo objeto
             leadAtual.NomeLead = NomeLead;
             leadAtual.TelefoneLead = teleLead;
             leadAtual.EnderecoLead = enderecoLead;
             leadAtual.StatusLead = StatusLead;
 
-            // sobrescrever o JSON
             fs.writeFileSync(filePath, JSON.stringify(leadAtual, null, 2));
 
             console.log(chalk.green('Lead atualizado com sucesso!'));
@@ -194,15 +190,12 @@ function criarLead() {
     ]).then((resp) => {
         const { nomeLead, teleLead, enderecoLead } = resp
 
-        // criar diretório Leads caso não exista
         if (!fs.existsSync('leads')) {
             fs.mkdirSync('leads')
         }
 
-        // agora o nome do arquivo é o número do telefone
         const filePath = `leads/${teleLead}.json`
 
-        // validar se o arquivo json do lead existe (pelo telefone)
         if (fs.existsSync(filePath)) {
             console.log(chalk.bgRed.black('Este telefone já está cadastrado como Lead'))
             return criarLead()
@@ -210,17 +203,16 @@ function criarLead() {
 
         const idLead = crypto.randomUUID();
 
-        // criar um objeto para o lead
+       
         const leadData = {
             idLead: idLead,
             NomeLead: nomeLead,
             TelefoneLead: teleLead,
             EnderecoLead: enderecoLead,
             StatusLead: "Inicial",
-            historico: "" // melhor já criar a chave historico
+            historico: "" 
         }
 
-        // salvar o objeto como JSON
         fs.writeFileSync(filePath, JSON.stringify(leadData, null, 2))
 
         console.log(chalk.green('Lead criado com sucesso'))
@@ -236,7 +228,6 @@ function RegistrarAtividade() {
     }]).then((resp) => {
         const teleLead = resp.teleLead;
 
-        // verifica se o lead existe
         if (!verificaTeleLead(teleLead)) {
             return RegistrarAtividade();
         }
@@ -247,7 +238,7 @@ function RegistrarAtividade() {
 
 function verificaLead(nomeLead)
 {
-    //info o usuario que o arquivo nao existe
+
     if(!fs.existsSync(`leads/${nomeLead}.json`))
     {
         console.log(chalk.bgRed.black('Este lead nao existe!'))
@@ -257,7 +248,7 @@ function verificaLead(nomeLead)
 }
 function verificaTeleLead(teleLead)
 {
-    //info o usuario que o arquivo nao existe
+
     if(!fs.existsSync(`leads/${teleLead}.json`))
     {
         console.log(chalk.bgRed.black('Este lead nao existe!'))
@@ -288,7 +279,6 @@ function criarAtividade(teleLead) {
 
         const data = new Date().toLocaleString();
 
-        // garantir pasta Atividades
         if (!fs.existsSync('Atividades')) {
             fs.mkdirSync('Atividades');
         }
@@ -305,7 +295,6 @@ function criarAtividade(teleLead) {
 
         fs.writeFileSync(`Atividades/${logAtividade}`, JSON.stringify(jsonAtividade, null, 2));
 
-        // atualizar o histórico no lead
         atualizarHistorico(teleLead, `${data} - ${nomeVendedor}: ${historico}`);
     }).catch(err => console.log(err));
 }
@@ -318,7 +307,7 @@ function atualizarHistorico(teleLead, historico) {
         return menu();
     }
 
-    // acumula histórico (em string, com quebra de linha)
+
     leadObj.historico = (leadObj.historico || '') + '\n' + historico;
 
     fs.writeFileSync(`leads/${teleLead}.json`,
@@ -333,13 +322,12 @@ function atualizarHistorico(teleLead, historico) {
 function getLead(nomeLead)
 {
     const leadJson = fs.readFileSync(`leads/${nomeLead}.json`,{
-        //utf-8 para pegar carac.especiais
+
         encoding: 'utf-8',
-        //flag para sinalizar que eu só quero ler o arquivo
+
         flag:'r'
     }) 
 
-    //tranformar o json em texto(quebra ele em chave e valor)
     return JSON.parse(leadJson)
 }
 
@@ -351,7 +339,6 @@ function removerLead()
     }]).then((resp) => {
         const nomeLead = resp.nomeLead
 
-        //se não existe o lead retornop ara a mesma func
 
         if(!verificaLead(nomeLead))
         {
@@ -362,7 +349,6 @@ function removerLead()
             console.log(chalk.bgBlue.black(`ocorreu um erro`))
             return withdraw()
         }
-        //remover o arquivo
         inquirer.prompt([{
             type: `confirm`,
             name: `confirmar`,
