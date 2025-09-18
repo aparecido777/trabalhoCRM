@@ -4,6 +4,7 @@ const leadController = require('./controllers/leadController');
 const atualizarLeadController = require('./controllers/atualizarLeadController');
 const atividadeController = require('./controllers/atividadeController');
 const consultarController = require('./controllers/consultarController');
+const { relatorio } = require('./controllers/relatorioController');
 
 
 
@@ -66,9 +67,9 @@ function handleRoute(parsedUrl, req, res) {
     else if (pathname === '/remove' && req.method === 'POST') {
         parsePostData(req, data => leadController.remove(data, res));
     }
-    else if (pathname === '/relatorioDados' && req.method === 'POST') {
-        parsePostData(req, data => leadController.relatorio(data, res));
-    }
+    if (pathname === "/relatorio") {
+    return relatorio(res);
+    }   
     else if (pathname === '/registraAtividade' && req.method === 'POST') {
         parsePostData(req, data => atividadeController.registra(data, res));
     }
