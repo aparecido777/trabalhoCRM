@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const leadController = require('./controllers/leadController');
+const atualizarLeadController = require('./controllers/atualizarLeadController');
 const atividadeController = require('./controllers/atividadeController');
 
 // Serve arquivos HTML
@@ -33,7 +34,8 @@ function parsePostData(req, callback) {
 
 // Roteamento
 function handleRoute(parsedUrl, req, res) {
-    const { pathname, query } = parsedUrl;
+    const { pathname } = parsedUrl;
+    console.log('Rota acessada:', pathname, 'Método:', req.method); // para debug
 
     // --- páginas HTML ---
     if (pathname === '/') serveHTML(res, 'index.html');
@@ -45,47 +47,26 @@ function handleRoute(parsedUrl, req, res) {
     else if (pathname === '/registrar') serveHTML(res, 'registraratv.html');
 
     // --- rotas que chamam controller ---
-    else if (pathname === '/cadastra') {
-        if (req.method === 'POST') {
-            parsePostData(req, data => leadController.cadastra(data, res));
-        } else {
-            serveHTML(res, 'cadastrarlead.html');
-        }
+    else if (pathname === '/cadastra' && req.method === 'POST') {
+        parsePostData(req, data => leadController.cadastra(data, res));
     }
-    else if (pathname === '/atualiza') {
-        if (req.method === 'POST') {
-            parsePostData(req, data => leadController.atualiza(data, res));
-        } else {
-            serveHTML(res, 'atualizarlead.html');
-        }
+    else if (pathname === '/consultaLead' && req.method === 'POST') {
+        parsePostData(req, data => atualizarLeadController.consultaLead(data, res));
     }
-    else if (pathname === '/consulta') {
-        if (req.method === 'POST') {
-            parsePostData(req, data => leadController.consulta(data, res));
-        } else {
-            serveHTML(res, 'consultarlead.html');
-        }
+    else if (pathname === '/atualiza' && req.method === 'POST') {
+        parsePostData(req, data => atualizarLeadController.atualiza(data, res));
     }
-    else if (pathname === '/remove') {
-        if (req.method === 'POST') {
-            parsePostData(req, data => leadController.remove(data, res));
-        } else {
-            serveHTML(res, 'removerlead.html');
-        }
+    else if (pathname === '/consulta' && req.method === 'POST') {
+        parsePostData(req, data => leadController.consulta(data, res));
     }
-    else if (pathname === '/relatorioDados') {
-        if (req.method === 'POST') {
-            parsePostData(req, data => leadController.relatorio(data, res));
-        } else {
-            serveHTML(res, 'relatorio.html');
-        }
+    else if (pathname === '/remove' && req.method === 'POST') {
+        parsePostData(req, data => leadController.remove(data, res));
     }
-    else if (pathname === '/registraAtividade') {
-        if (req.method === 'POST') {
-            parsePostData(req, data => atividadeController.registra(data, res));
-        } else {
-            serveHTML(res, 'registraratv.html');
-        }
+    else if (pathname === '/relatorioDados' && req.method === 'POST') {
+        parsePostData(req, data => leadController.relatorio(data, res));
+    }
+    else if (pathname === '/registraAtividade' && req.method === 'POST') {
+        parsePostData(req, data => atividadeController.registra(data, res));
     }
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });

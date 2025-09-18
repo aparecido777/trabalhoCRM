@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualizar Lead</title>
     <link rel="stylesheet" href="styleHtmls.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
-    <option value="opcao1">Inicial</option>
-    <option value="opcao2">Proposta</option>
-    <option value="opcao3">Negociação</option>
-    <option value="opcao4">Fechamento</option>
-    </select>
+    <h1>Atualizar Lead</h1>
+
+    <!-- Passo 1: Pesquisar pelo número -->
+    <h2>Pesquise o lead para alterar pelo número:</h2>
+    <form id="searchForm" method="POST" action="/consultaLead">
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" required>
+        <button type="submit">Buscar</button>
+    </form>
 </body>
 </html>
