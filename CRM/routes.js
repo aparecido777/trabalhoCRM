@@ -42,6 +42,7 @@ function handleRoute(parsedUrl, req, res) {
     else if (pathname === '/atualizar') serveHTML(res, 'atualizarlead.html');
     else if (pathname === '/consultar') serveHTML(res, 'consultarlead.html');
     else if (pathname === '/remover') serveHTML(res, 'removerlead.html');
+    else if (pathname === '/relatorioVendas') serveHTML(res, 'relatorio.html');
     else if (pathname === '/registrar') serveHTML(res, 'registraratv.html');
 
     // --- rotas que chamam controller ---
