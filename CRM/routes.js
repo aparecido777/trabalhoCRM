@@ -5,6 +5,7 @@ const atualizarLeadController = require('./controllers/atualizarLeadController')
 const atividadeController = require('./controllers/atividadeController');
 const consultarController = require('./controllers/consultarController');
 const { relatorio } = require('./controllers/relatorioController');
+const removerController = require('./controllers/removerController');
 
 // Serve arquivos HTML
 function serveHTML(res, fileName) {
@@ -50,7 +51,7 @@ function handleRoute(parsedUrl, req, res) {
     else if (pathname === '/consultaLead' && req.method === 'POST') parsePostData(req, data => atualizarLeadController.consultaLead(data, res));
     else if (pathname === '/atualiza' && req.method === 'POST') parsePostData(req, data => atualizarLeadController.atualiza(data, res));
     else if (pathname === '/consultarLead' && req.method === 'POST') parsePostData(req, data => consultarController.consultarLead(data, res));
-    else if (pathname === '/remove' && req.method === 'POST') parsePostData(req, data => leadController.remove(data, res));
+    else if (pathname === '/remove' && req.method === 'POST') parsePostData(req, data => removerController.removerLead(data, res));
     else if (pathname === '/registraAtividade' && req.method === 'POST') parsePostData(req, data => atividadeController.registra(data, res));
     else if (pathname === '/relatorio') return relatorio(res);
 

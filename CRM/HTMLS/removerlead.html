@@ -26,7 +26,7 @@
                                 <strong>Atenção!</strong> Esta ação não pode ser desfeita. O lead será permanentemente removido do sistema.
                             </div>
                             
-                            <form action="/removerLead" method="POST" onsubmit="return confirm('Tem certeza que deseja remover este lead? Esta ação não pode ser desfeita.')">
+                            <form action="/remove" method="POST" onsubmit="return confirm('Tem certeza que deseja remover este lead? Esta ação não pode ser desfeita.')">
                                 <div class="mb-3">
                                     <label for="numero" class="form-label">Número do Lead:</label>
                                     <input type="text" class="form-control" id="numero" name="numero" required 
@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <a href="index.html" class="btn btn-secondary me-md-2">Voltar</a>
+                                    <a href="/" class="btn btn-secondary me-md-2">Voltar</a>
                                     <button type="submit" class="btn btn-danger">Remover Lead</button>
                                 </div>
                             </form>
