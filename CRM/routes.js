@@ -6,24 +6,19 @@ const atividadeController = require('./controllers/atividadeController');
 const consultarController = require('./controllers/consultarController');
 const { relatorio } = require('./controllers/relatorioController');
 
-
-
 // Serve arquivos HTML
 function serveHTML(res, fileName) {
+    // Caminho absoluto correto
     const filePath = path.join(__dirname, 'HTMLS', fileName);
-    if (fs.existsSync(filePath)) {
-        fs.readFile(filePath, (err, data) => {
-            if (err) {
-                res.writeHead(500, { 'Content-Type': 'text/plain' });
-                return res.end('Erro ao carregar o arquivo.');
-            }
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(data);
-        });
-    } else {
-        res.writeHead(404, { 'Content-Type': 'text/plain' });
-        res.end('Arquivo não encontrado.');
-    }
+
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            return res.end('Arquivo não encontrado: ' + filePath);
+        }
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(data);
+    });
 }
 
 // Lê dados de um POST
@@ -39,40 +34,25 @@ function parsePostData(req, callback) {
 // Roteamento
 function handleRoute(parsedUrl, req, res) {
     const { pathname } = parsedUrl;
-    console.log('Rota acessada:', pathname, 'Método:', req.method); // para debug
+    console.log('Rota acessada:', pathname, 'Método:', req.method);
 
     // --- páginas HTML ---
-    if (pathname === '/') serveHTML(res, 'index.html');
-    else if (pathname === '/cadastrar') serveHTML(res, 'cadastrarlead.html');
+    if (pathname === '/' || pathname === '/index') serveHTML(res, 'index.html');
+    else if (pathname === '/cadastrar' || pathname === '/cadastrar/') serveHTML(res, 'cadastrarlead.html');
     else if (pathname === '/atualizar') serveHTML(res, 'atualizarlead.html');
     else if (pathname === '/consultar') serveHTML(res, 'consultarlead.html');
     else if (pathname === '/remover') serveHTML(res, 'removerlead.html');
-    else if (pathname === '/relatorio') serveHTML(res, 'relatorio.html');
     else if (pathname === '/registrar') serveHTML(res, 'registraratv.html');
 
     // --- rotas que chamam controller ---
-    else if (pathname === '/cadastra' && req.method === 'POST') {
-        parsePostData(req, data => leadController.cadastra(data, res));
-    }
-    else if (pathname === '/consultaLead' && req.method === 'POST') {
-        parsePostData(req, data => atualizarLeadController.consultaLead(data, res));
-    }
-    else if (pathname === '/atualiza' && req.method === 'POST') {
-        parsePostData(req, data => atualizarLeadController.atualiza(data, res));
-    }
-    else if (pathname === '/consultarLead' && req.method === 'POST') {
-    parsePostData(req, data => consultarController.consultarLead(data, res));
-    }
+    else if (pathname === '/cadastra' && req.method === 'POST') parsePostData(req, data => leadController.cadastra(data, res));
+    else if (pathname === '/consultaLead' && req.method === 'POST') parsePostData(req, data => atualizarLeadController.consultaLead(data, res));
+    else if (pathname === '/atualiza' && req.method === 'POST') parsePostData(req, data => atualizarLeadController.atualiza(data, res));
+    else if (pathname === '/consultarLead' && req.method === 'POST') parsePostData(req, data => consultarController.consultarLead(data, res));
+    else if (pathname === '/remove' && req.method === 'POST') parsePostData(req, data => leadController.remove(data, res));
+    else if (pathname === '/registraAtividade' && req.method === 'POST') parsePostData(req, data => atividadeController.registra(data, res));
+    else if (pathname === '/relatorio') return relatorio(res);
 
-    else if (pathname === '/remove' && req.method === 'POST') {
-        parsePostData(req, data => leadController.remove(data, res));
-    }
-    if (pathname === "/relatorio") {
-    return relatorio(res);
-    }   
-    else if (pathname === '/registraAtividade' && req.method === 'POST') {
-        parsePostData(req, data => atividadeController.registra(data, res));
-    }
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('Página não encontrada.');
