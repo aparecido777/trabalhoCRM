@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consultar Lead</title>
     <link rel="stylesheet" href="styleHtmls.css">
-    <script src="script.js" defer></script>    
 </head>
 <body>
-    
+    <h1>Consultar Lead</h1>
+    <h2>Pesquise o lead para consultar pelo número:</h2>
+    <form id="searchForm" method="POST" action="/consultarLead">
+        <label for="numero">Número:</label>
+        <input type="text" id="numero" name="numero" required>
+        <button type="submit">Buscar</button>
+    </form>
 </body>
 </html>
